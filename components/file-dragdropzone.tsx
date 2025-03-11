@@ -25,8 +25,11 @@ export default function FileDragDropZone() {
       acceptedFiles.forEach((file) => {
         formData.append(file.name, file);
       });
+
+      await uploadImageMutation.mutate(formData);
     }
   }, []);
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     multiple: true,
@@ -38,7 +41,7 @@ export default function FileDragDropZone() {
       className="w-full py-20 border-4 border-dotted border-indigo-700 flex flex-col items-center justify-center cursor-pointer"
     >
       <input {...getInputProps()} />
-      {uploadImageMutation.isLoading ? (
+      {uploadImageMutation.isPending ? (
         <Spinner />
       ) : isDragActive ? (
         <p>파일을 놓아주세요.</p>
