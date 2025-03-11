@@ -2,20 +2,21 @@
 
 import { IconButton } from "@material-tailwind/react";
 import React from "react";
+import { getImageUrl } from "utils/supabase/storage";
 
-export default function DropboxImage() {
+export default function DropboxImage({ image }) {
   return (
     <div className="relative w-full flex flex-col gap-2 p-4 border border-gray-100 rounded-2xl shadow-md">
       {/* Image */}
       <div>
         <img
-          src="/images/dropbox_icon.png"
+          src={getImageUrl(image.name)}
           className="w-full aspect-square rounded-2xl"
         />
       </div>
 
       {/* File Name */}
-      <div>cutedog.jpeg</div>
+      <div>{image.name}</div>
 
       {/* Delete Button */}
       <div className="absolute top-4 right-4 rounded-full">
